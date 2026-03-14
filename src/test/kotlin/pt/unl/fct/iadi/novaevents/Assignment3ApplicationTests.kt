@@ -88,26 +88,26 @@ class Assignment3ApplicationTests {
     @Test
     fun editingEventWithValidDataRedirectsToClubPage() {
         mockMvc.perform(
-                        put("/clubs/1/events/2/edit")
+                        put("/clubs/1/events/3/edit")
                                 .contentType("application/x-www-form-urlencoded")
-                                .param("name", "Updated Spring Chess Open")
+                                .param("name", "Updated Chess Club Social Night")
                                 .param("date", "2026-04-21")
-                                .param("type", "COMPETITION")
+                                .param("type", "SOCIAL")
                                 .param("location", "Main Hall")
                                 .param("description", "Updated description")
                 )
                 .andExpect(status().is3xxRedirection)
-                .andExpect(header().string("Location", "/clubs/1"))
+                .andExpect(header().string("Location", "/clubs/1/events/3"))
     }
 
     @Test
     fun editingEventWithDuplicateNameShowsValidationError() {
         mockMvc.perform(
-                        put("/clubs/1/events/2/edit")
+                        put("/clubs/1/events/3/edit")
                                 .contentType("application/x-www-form-urlencoded")
-                                .param("name", "Beginner's Chess Workshop")
+                                .param("name", "Spring Chess Tournament")
                                 .param("date", "2026-04-21")
-                                .param("type", "COMPETITION")
+                                .param("type", "SOCIAL")
                                 .param("location", "Main Hall")
                                 .param("description", "Updated description")
                 )

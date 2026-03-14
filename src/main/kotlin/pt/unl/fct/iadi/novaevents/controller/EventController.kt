@@ -147,7 +147,7 @@ class EventController(
 
         return try {
             eventService.update(owningClubId, eventId, eventForm)
-            "redirect:/clubs/$owningClubId"
+            "redirect:/clubs/$owningClubId/events/$eventId"
         } catch (_: DuplicateEventNameException) {
             bindingResult.rejectValue("name", "duplicate", "An event with this name already exists")
             model.addAttribute("event", eventService.findById(eventId))

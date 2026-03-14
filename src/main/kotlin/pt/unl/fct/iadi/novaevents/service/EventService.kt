@@ -25,7 +25,7 @@ class EventService {
                     Event(
                             id = 2,
                             clubId = 1,
-                            name = "Spring Chess Open",
+                            name = "Spring Chess Tournament",
                             date = LocalDate.of(2026, 4, 19),
                             location = "Room A101",
                             type = EventType.COMPETITION,
@@ -33,6 +33,16 @@ class EventService {
                     ),
                     Event(
                             id = 3,
+                            clubId = 1,
+                            name = "Chess Club Social Night",
+                            date = LocalDate.of(2026, 4, 24),
+                            location = "Student Lounge",
+                            type = EventType.SOCIAL,
+                            description =
+                                    "Casual games and community time for club members and newcomers."
+                    ),
+                    Event(
+                            id = 4,
                             clubId = 2,
                             name = "Line Follower Workshop",
                             date = LocalDate.of(2026, 4, 12),
@@ -41,7 +51,7 @@ class EventService {
                             description = "Build and tune a basic autonomous robot."
                     ),
                     Event(
-                            id = 4,
+                            id = 5,
                             clubId = 3,
                             name = "Street Portrait Walk",
                             date = LocalDate.of(2026, 4, 15),
@@ -50,7 +60,7 @@ class EventService {
                             description = "Guided photo walk focused on portrait composition."
                     ),
                     Event(
-                            id = 5,
+                            id = 6,
                             clubId = 4,
                             name = "Serra Sunrise Hike",
                             date = LocalDate.of(2026, 4, 26),
@@ -59,7 +69,7 @@ class EventService {
                             description = "Early morning hike with beginner-friendly pace."
                     ),
                     Event(
-                            id = 6,
+                            id = 7,
                             clubId = 5,
                             name = "Classic Noir Night",
                             date = LocalDate.of(2026, 4, 22),
@@ -69,7 +79,7 @@ class EventService {
                     )
             )
 
-    private var nextId: Long = 7
+    private var nextId: Long = 8
 
     fun findAll(filter: EventFilter): List<Event> {
         return events.asSequence()
