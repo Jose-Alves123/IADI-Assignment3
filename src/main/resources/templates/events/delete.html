@@ -16,7 +16,7 @@
                     </p>
                     <p class="text-muted mb-4">This action cannot be undone.</p>
 
-                    <form th:action="@{/clubs/{clubId}/events/{eventId}(clubId=${club.id},eventId=${event.id})}" method="post" class="d-flex gap-2">
+                    <form th:action="@{/clubs/{clubId}/events/{eventId}/delete(clubId=${club.id},eventId=${event.id})}" method="post" class="d-flex gap-2">
                         <input type="hidden" name="_method" value="delete">
                         <button type="submit" class="btn btn-danger">Delete Event</button>
                         <a class="btn btn-outline-secondary" th:href="@{/clubs/{clubId}/events/{eventId}(clubId=${club.id},eventId=${event.id})}">Cancel</a>

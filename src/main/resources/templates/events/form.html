@@ -12,7 +12,7 @@
                     <h1 class="h3 mb-3" th:text="${isEdit} ? 'Edit Event' : 'Create Event'">Event Form</h1>
                     <p class="text-muted" th:text="'Club: ' + ${club.name}">Club context</p>
 
-                      <form th:action="${isEdit} ? @{/clubs/{clubId}/events/{eventId}(clubId=${club.id},eventId=${event.id})} : @{/clubs/{clubId}/events(clubId=${club.id})}"
+                      <form th:action="${isEdit} ? @{/clubs/{clubId}/events/{eventId}/edit(clubId=${club.id},eventId=${event.id})} : @{/clubs/{clubId}/events(clubId=${club.id})}"
                           th:object="${eventForm}" method="post" novalidate>
                         <input th:if="${isEdit}" type="hidden" name="_method" value="put">
 
