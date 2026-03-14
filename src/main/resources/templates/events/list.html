@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Events')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<main class="container">
+    <h1 class="h3 mb-3">All Events</h1>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <form method="get" th:action="@{/events}" class="row g-3 align-items-end">
+                <div class="col-md-3">
+                    <label for="type" class="form-label">Event Type</label>
+                    <select id="type" name="type" class="form-select">
+                        <option value="">All</option>
+                        <option th:each="type : ${types}"
+                                th:value="${type}"
+                                th:text="${type}"
+                                th:selected="${selectedType == type}">WORKSHOP</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <label for="clubId" class="form-label">Club</label>
+                    <select id="clubId" name="clubId" class="form-select">
+                        <option value="">All</option>
+                        <option th:each="club : ${clubs}"
+                                th:value="${club.id}"
+                                th:text="${club.name}"
+                                th:selected="${selectedClubId == club.id}">Club</option>
+                    </select>
+                </div>
+
+                <div class="col-md-2">
+                    <label for="from" class="form-label">From</label>
+                    <input id="from" name="from" type="date" class="form-control" th:value="${selectedFrom}">
+                </div>
+
+                <div class="col-md-2">
+                    <label for="to" class="form-label">To</label>
+                    <input id="to" name="to" type="date" class="form-control" th:value="${selectedTo}">
+                </div>
+
+                <div class="col-md-2 d-grid">
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+            <table class="table table-striped mb-0">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Club</th>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${#lists.isEmpty(events)}">
+                    <td colspan="5" class="text-center text-muted">No events match the selected filters.</td>
+                </tr>
+                <tr th:each="event : ${events}">
+                    <td>
+                        <a th:href="@{/clubs/{clubId}/events/{eventId}(clubId=${event.clubId},eventId=${event.id})}"
+                           th:text="${event.name}">Event name</a>
+                    </td>
+                    <td>
+                        <a th:href="@{/clubs/{clubId}(clubId=${event.clubId})}" th:text="${clubNames[event.clubId]}">Club</a>
+                    </td>
+                    <td th:text="${event.date}">2026-01-01</td>
+                    <td th:text="${event.type}">WORKSHOP</td>
+                    <td>
+                        <a class="btn btn-sm btn-outline-secondary"
+                           th:href="@{/clubs/{clubId}/events/{eventId}/edit(clubId=${event.clubId},eventId=${event.id})}">Edit</a>
+                        <a class="btn btn-sm btn-outline-danger"
+                           th:href="@{/clubs/{clubId}/events/{eventId}/delete(clubId=${event.clubId},eventId=${event.id})}">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+<th:block th:replace="~{fragments/layout :: scripts}"></th:block>
+</body>
+</html>

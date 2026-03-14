@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Event Details')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<main class="container">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h1 class="h3 mb-3" th:text="${event.name}">Event Name</h1>
+
+            <dl class="row mb-4">
+                <dt class="col-sm-3">Club</dt>
+                <dd class="col-sm-9">
+                    <a th:href="@{/clubs/{clubId}(clubId=${club.id})}" th:text="${club.name}">Club</a>
+                </dd>
+
+                <dt class="col-sm-3">Date</dt>
+                <dd class="col-sm-9" th:text="${event.date}">2026-01-01</dd>
+
+                <dt class="col-sm-3">Location</dt>
+                <dd class="col-sm-9" th:text="${event.location ?: '-'}">-</dd>
+
+                <dt class="col-sm-3">Type</dt>
+                <dd class="col-sm-9" th:text="${event.type}">WORKSHOP</dd>
+
+                <dt class="col-sm-3">Description</dt>
+                <dd class="col-sm-9" th:text="${event.description ?: '-'}">-</dd>
+            </dl>
+
+            <div class="d-flex gap-2">
+                <a class="btn btn-outline-secondary"
+                   th:href="@{/clubs/{clubId}/events/{eventId}/edit(clubId=${club.id},eventId=${event.id})}">Edit</a>
+                <a class="btn btn-outline-danger"
+                   th:href="@{/clubs/{clubId}/events/{eventId}/delete(clubId=${club.id},eventId=${event.id})}">Delete</a>
+                <a class="btn btn-link" th:href="@{/clubs/{clubId}(clubId=${club.id})}">Back to Club</a>
+            </div>
+        </div>
+    </div>
+</main>
+
+<th:block th:replace="~{fragments/layout :: scripts}"></th:block>
+</body>
+</html>

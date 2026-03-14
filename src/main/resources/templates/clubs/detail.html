@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Club Details')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<main class="container">
+    <div class="row g-4">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h1 class="h3 mb-3" th:text="${club.name}">Club Name</h1>
+                    <p class="mb-2"><strong>Category:</strong> <span th:text="${club.category}">CATEGORY</span></p>
+                    <p class="mb-0" th:text="${club.description}">Club description</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 d-flex justify-content-between align-items-center">
+            <h2 class="h4 mb-0">Events</h2>
+            <a class="btn btn-primary" th:href="@{/clubs/{clubId}/events/new(clubId=${club.id})}">Create Event</a>
+        </div>
+
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-body p-0">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Date</th>
+                            <th>Type</th>
+                            <th>Location</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:if="${#lists.isEmpty(events)}">
+                            <td colspan="4" class="text-center text-muted">No events for this club yet.</td>
+                        </tr>
+                        <tr th:each="event : ${events}">
+                            <td>
+                                <a th:href="@{/clubs/{clubId}/events/{eventId}(clubId=${club.id},eventId=${event.id})}"
+                                   th:text="${event.name}">Event name</a>
+                            </td>
+                            <td th:text="${event.date}">2026-01-01</td>
+                            <td th:text="${event.type}">WORKSHOP</td>
+                            <td th:text="${event.location ?: '-'}">-</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<th:block th:replace="~{fragments/layout :: scripts}"></th:block>
+</body>
+</html>
